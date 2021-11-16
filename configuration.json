@@ -1,0 +1,42 @@
+{
+  "user" : [{
+    "id" : 1,
+    "Product" : {
+      "kafka": {
+        "topic": {
+          "Operations": {
+            "delete" : {
+              "API Path" : "DELETE /topics/#",
+              "Request" : {"cluster_id" : "..."},
+              "Response" : { "data" : "..."}
+            },
+            "modify" : {
+              "API Path" : "PUT /topics/",
+              "Request" : {"cluster_id" : "...", "data" : "..."},
+              "Response" : { "data" : "..."}
+            }
+          },
+          "authentification": "..."
+        }
+      },
+
+      "MySQLDB": {
+        "Tables": {
+          "Operations": {
+            "delete" : {
+              "API Path" : "DELETE /tables/#",
+              "Request" : {"db_name" : "..."},
+              "Response" : { "data" : "..."}
+            },
+            "modify" : {
+              "API Path" : "PUT /tables/",
+              "Request" : {"db_name" : "...", "data" : "..."},
+              "Response" : { "data" : "..."}
+            }
+          },
+          "authentification": "..."
+        }
+      }
+    }
+  }]
+}
