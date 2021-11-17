@@ -5,18 +5,23 @@
       "kafka": {
         "topic": {
           "Operations": {
-            "delete" : {
-              "API Path" : "DELETE /topics/#",
-              "Request" : {"cluster_id" : "..."},
+            "GET_ALL" : {
+              "API_Path" : "GET /kafka/v3/clusters/cluster-0/topics",
+              "Request" : {},
               "Response" : { "data" : "..."}
             },
-            "modify" : {
-              "API Path" : "PUT /topics/",
-              "Request" : {"cluster_id" : "...", "data" : "..."},
+            "DELETE" : {
+              "API_Path" : "DELETE /kafka/v3/clusters/cluster-0/topics/{topic_name}",
+              "Request" : {"path_param" : ["topic_name"]},
+              "Response" : { "data" : "..."}
+            },
+            "POST" : {
+              "API_Path" : "POST /kafka/v3/clusters/cluster-0/topics",
+              "Request" : {"body" : {"required" : ["topic_name"]}},
               "Response" : { "data" : "..."}
             }
           },
-          "authentification": "..."
+          "authentication": "..."
         }
       },
 
@@ -34,7 +39,7 @@
               "Response" : { "data" : "..."}
             }
           },
-          "authentification": "..."
+          "authentication": "..."
         }
       }
     }

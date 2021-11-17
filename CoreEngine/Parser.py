@@ -1,6 +1,5 @@
 import json
 import os
-from os import path
 
 class Parser:
     def __init__(self):
@@ -29,7 +28,7 @@ class Parser:
          Check whether the given user has permission to perform a task
 
         :param user_id: user id
-        :param task: task in a format of Product:Product:level1:level2:...:Operations:operation. For example,
+        :param task: task in a format of Product:<Product>:<level1>:<level2>:...:Operations:<operation>. For example,
                      Product:kafka:topic:Operations:read.
         :return: True if this user has permission to perform such task, otherwise False
         """
