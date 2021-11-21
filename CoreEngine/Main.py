@@ -1,4 +1,4 @@
-from Parser import Parser
+from .Parser import Parser
 from flask import Flask, request, jsonify
 import os
 

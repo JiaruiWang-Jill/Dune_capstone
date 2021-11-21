@@ -1,10 +1,14 @@
 # Dune
 All-in-one data management platform that allows you to govern your data infrastructures more easily.
 
-Requirement: python3.8
-Recommanded IDE: PyCharm
+Requirement: python3.8 \
+Recommended IDE: PyCharm \
+Recommended Tools: Postman
 
 ## Developer Guide
+
+### Setup
+
 To start with, please set up your python environment. In this project, we will use virtual environment.
 ```commandline
 python -m venv venv/
@@ -16,6 +20,18 @@ if you want to add any dependency, **please dump that to the requirement.txt fil
 ```commandline
 pip freeze > requirements.txt
 ```
+
+### Development
+1. After adding new features, please deploy and test Dune app locally before push.
+```commandline
+heroku local
+```
+* If you don't have heroku command yet, please install it by
+```commandline
+brew tap heroku/brew && brew install heroku
+```
+2. Use your Postman to send out API requests.
+3. After finishing developing, just do `git push` to deploy your code.
 
 ## User Guide
 
