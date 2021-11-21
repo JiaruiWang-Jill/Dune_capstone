@@ -1,27 +1,28 @@
 {
-  "user" : [{
+  "User" : [{
     "id" : 1,
     "Product" : {
       "kafka": {
         "topic": {
           "Operations": {
             "GET_ALL" : {
-              "API_Path" : "GET /kafka/v3/clusters/cluster-0/topics",
+              "API_Path" : "GET /kafka/v3/clusters/lkc-6p088/topics",
               "Request" : {},
-              "Response" : { "data" : "..."}
+              "Response" : { "Data" : "..."}
             },
             "DELETE" : {
-              "API_Path" : "DELETE /kafka/v3/clusters/cluster-0/topics/{topic_name}",
-              "Request" : {"path_param" : ["topic_name"]},
-              "Response" : { "data" : "..."}
+              "API_Path" : "DELETE /kafka/v3/clusters/lkc-6p088/topics/{topic_name}",
+              "Request" : {"Path_Param" : ["topic_name"]},
+              "Response" : { "Data" : "..."}
             },
             "POST" : {
-              "API_Path" : "POST /kafka/v3/clusters/cluster-0/topics",
-              "Request" : {"body" : {"required" : ["topic_name"]}},
-              "Response" : { "data" : "..."}
+              "API_Path" : "POST /kafka/v3/clusters/lkc-6p088/topics",
+              "Request" : {"Body" : {"Required" : ["topic_name"], "Optional": []}},
+              "Response" : { "Data" : "..."}
             }
           },
-          "authentication": "..."
+          "Authentication": {"Authorization" : "Basic M0RNUFY0UTRBUk5FRkxJNDpLNkdQNThNTlFPYlh5TXVQdVZ3eHN1aUdiTld4aDdGaWRuWmU0WUx3K2pvVW1xQXZXcHZkbm11K3h4TnNIdEcvCg=="},
+          "Https" : "pkc-lzvrd.us-west4.gcp.confluent.cloud:443"
         }
       },
 
