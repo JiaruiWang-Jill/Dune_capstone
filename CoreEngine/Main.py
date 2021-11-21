@@ -1,10 +1,25 @@
 from Parser import Parser
+from flask import Flask, request, jsonify
 import os
 
-def commandLine(user_id, task_file):
+
+app = Flask(__name__)
+
+
+@app.route('/task/<uuid>', methods=['POST'])
+def execute_tasks(uuid):
+    task_list = request.json['TaskList']
+    return jsonify(task_list)
+
+
+if __name__ == '__main__':
+    app.run(threaded=True, port=5000)
+
+
+def command_line(user_id, task_file):
     # Check whether user exists
     parser = Parser()
-    if parser.findUser(user_id=user_id) is None:
+    if parser.find_user(user_id=user_id) is None:
         # TODO: Dump every print message into log
         print("User doesn't exist")
         return None
@@ -17,7 +32,7 @@ def commandLine(user_id, task_file):
 
     for task in tasks:
         operation = task.split(" ")[0]
-        if not parser.checkPermission(user_id=user_id, task=operation):
+        if not parser.check_permission(user_id=user_id, task=operation):
             # this user doesn't have permission to this specific task
             # TODO: Dump every print message into log
             print("User doesn't have permission to: " + operation)

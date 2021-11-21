@@ -8,22 +8,21 @@ class Parser:
         with open(cfg) as f:
             self.configuration = json.load(f)
 
-    def findUser(self, user_id):
+    def find_user(self, user_id):
         user_list = self.configuration["user"]
         for u in user_list:
             if user_id == u["id"]:
                 return True
         return False
 
-    def findGetUser(self, user_id):
+    def find_and_get_user(self, user_id):
         user_list = self.configuration["user"]
         for u in user_list:
             if user_id == u["id"]:
                 return u
         return None
 
-
-    def checkPermission(self, user_id, task):
+    def check_permission(self, user_id, task):
         """
          Check whether the given user has permission to perform a task
 
@@ -32,7 +31,7 @@ class Parser:
                      Product:kafka:topic:Operations:read.
         :return: True if this user has permission to perform such task, otherwise False
         """
-        cur_user = self.findGetUser(user_id)
+        cur_user = self.find_and_get_user(user_id)
         if cur_user is None:
             # Given user doesn't exist
             return False
