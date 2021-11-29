@@ -1,6 +1,5 @@
-from CoreEngine.EventBus import  command_line
+from CoreEngine.EventBus import command_line
 from flask import Flask, request, jsonify, abort
-
 
 app = Flask(__name__)
 
@@ -12,6 +11,16 @@ def execute_tasks(uuid):
 
     if response is None:
         abort(400, 'Bad Request. Please check log for further information')
+
+    return jsonify(response)
+
+
+@app.route('/health/', methods=['POST', 'GET'])
+def health_check():
+    response = ["status: success"]
+
+    if response is None:
+        abort(400, 'Bad Request.')
 
     return jsonify(response)
 
