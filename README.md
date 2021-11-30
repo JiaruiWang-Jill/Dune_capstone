@@ -34,10 +34,35 @@ brew tap heroku/brew && brew install heroku
 3. After finishing developing, just do `git push` to deploy your code.
 
 ## User Guide
+### Configuration Guide
+Configuration should comply to the following format. And users are responsible to fill in the detail inside each {}.
+```json
+{
+  "User" : [{
+    "id" : "{999}",
+    "Product" : {
+      "{level1}": {
+        "{level2}": {
+          "Operations": {
+            "GET_ALL" : {
+              "API_Path" : "{}",
+              "Request" : {"Path_Param" : ["{}"]},
+              "Response" : { "Data" : "{}"}
+            },
+            "POST" : {
+              "API_Path" : "{}",
+              "Request" : {"Body" : {"Required" : ["{}"], "Optional": []}},
+              "Response" : { "Data" : "{}"}
+            }
+          },
+          "Authentication": {"{header1}" : "{}"},
+          "Https" : "{}"
+        }
+      }}}]
+    }
+```
 
-TODO
-
-### Command Line Input
+### Task List Guide
 All command line input should have the same format as below:
 ```text
 Product:<Product>:<level1>:<level2>:...:Operations:<operation>
@@ -48,3 +73,17 @@ Product:kafka:topic:Operations:POST topic_name:t1
 Product:kafka:topic:Operations:GET_ALL
 ```
 
+To use our API, send your task list to `https://dune-app-ucla.herokuapp.com/task/1`
+
+Example CURL command:
+```commandline
+curl --location --request POST 'https://dune-app-ucla.herokuapp.com/task/1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "TaskList": [
+        "Product:kafka:topic:Operations:GET_ALL",
+        "Product:kafka:topic:Operations:DELETE topic_name:t1",
+        "Product:kafka:topic:Operations:GET_ALL"
+    ]
+}'
+```
