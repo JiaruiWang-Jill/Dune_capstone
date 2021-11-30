@@ -42,6 +42,11 @@
               "API_Path" : "DELETE /api/v2/jrdune/_table/test_table/{id}",
               "Request" : {"Path_Param" : ["id"]},
               "Response" : { "Data" : "..."}
+            },
+            "POST": { 
+              "API_Path" : "POST /api/v2/jrdune/_table/test_table",
+              "Request" : {"Body" : {"Required" : ["resource"], "Optional": []}},
+              "Response" : { "Data" : "..."}
             }
           },
           "Authentication": {"accpet":"application/json","X-DreamFactory-API-Key": "36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88","X-DreamFactory-Session-Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4MGMyZjNiM2I0YTZjODIwMDgwMmFmYzZmODNlNzY1MyIsImlzcyI6Imh0dHBzOi8vZHVuZS5hcHBzLmRyZWFtZmFjdG9yeS5jb20vYXBpL3YyL3N5c3RlbS9hZG1pbi9zZXNzaW9uIiwiaWF0IjoxNjM4MjQ4NzkwLCJleHAiOjE2MzgzMzUxOTAsIm5iZiI6MTYzODI0ODc5MCwianRpIjoiVHBmdEZobzBsV1FVNzFLZSIsInVzZXJfaWQiOjEsImZvcmV2ZXIiOmZhbHNlfQ.qwm8ss75mMeW2fOe_vFQTmYawg_Iicynh_g-XkVFTVk"},

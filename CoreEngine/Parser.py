@@ -14,10 +14,22 @@ class Parser:
 
     @staticmethod
     def build_params_dict(params):
-        params_dict = {}
-        for p in params:
-            pair = p.split(":")
-            params_dict[pair[0]] = pair[1]
+        params_dict = {} 
+        for p in params: 
+            if "resource" in p: 
+                pair0 = p.split(":")[0]
+                pair1 = p[p.index(":")+1:] 
+                temp_dict = {}
+                pair1_list = []
+                while '{' in pair1:
+                    name_value = pair1[pair1.index('{')+6 : pair1.index('}')]
+                    pair1 = pair1[pair1.index('}')+1:]
+                    temp_dict["name"] = name_value
+                    pair1_list.append(temp_dict) 
+                params_dict[pair0] = pair1_list
+            else:
+                pair = p.split(":")
+                params_dict[pair[0]] = pair[1] 
         return params_dict
 
     def find_user(self):
@@ -122,3 +134,5 @@ class Parser:
 # print(x.generate_payload(["topic_name:t1"]))
 # print(x.get_https("Product:kafka:topic:Operations:DELETE"))
 # print(x.get_authentication("Product:kafka:topic:Operations:DELETE"))
+p = Parser
+p.build_params_dict(['resource:[{name:jiarui2},{name:junyu2}]'])
