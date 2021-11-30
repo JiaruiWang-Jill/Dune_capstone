@@ -24,25 +24,31 @@
           "Authentication": {"Authorization" : "Basic M0RNUFY0UTRBUk5FRkxJNDpLNkdQNThNTlFPYlh5TXVQdVZ3eHN1aUdiTld4aDdGaWRuWmU0WUx3K2pvVW1xQXZXcHZkbm11K3h4TnNIdEcvCg=="},
           "Https" : "pkc-lzvrd.us-west4.gcp.confluent.cloud:443"
         }
-      },
-
-      "MySQLDB": {
-        "Tables": {
-          "Operations": {
-            "delete" : {
-              "API Path" : "DELETE /tables/#",
-              "Request" : {"db_name" : "..."},
-              "Response" : { "data" : "..."}
+      },  
+      "mysql": {
+        "table": {   
+          "Operations": { 
+            "GET_ALL": { 
+              "API_Path" : "GET /api/v2/jrdune/_table/test_table",
+              "Request" : {},
+              "Response" : { "Data" : "..."}
             },
-            "modify" : {
-              "API Path" : "PUT /tables/",
-              "Request" : {"db_name" : "...", "data" : "..."},
-              "Response" : { "data" : "..."}
+            "GET": { 
+              "API_Path" : "GET /api/v2/jrdune/_table/test_table/{id}",
+              "Request" : {"Path_Param" : ["id"]},
+              "Response" : { "Data" : "..."}
+            },
+            "DELETE": { 
+              "API_Path" : "DELETE /api/v2/jrdune/_table/test_table/{id}",
+              "Request" : {"Path_Param" : ["id"]},
+              "Response" : { "Data" : "..."}
             }
           },
-          "authentication": "..."
+          "Authentication": {"accpet":"application/json","X-DreamFactory-API-Key": "36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88","X-DreamFactory-Session-Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4MGMyZjNiM2I0YTZjODIwMDgwMmFmYzZmODNlNzY1MyIsImlzcyI6Imh0dHBzOi8vZHVuZS5hcHBzLmRyZWFtZmFjdG9yeS5jb20vYXBpL3YyL3N5c3RlbS9hZG1pbi9zZXNzaW9uIiwiaWF0IjoxNjM4MjQ4NzkwLCJleHAiOjE2MzgzMzUxOTAsIm5iZiI6MTYzODI0ODc5MCwianRpIjoiVHBmdEZobzBsV1FVNzFLZSIsInVzZXJfaWQiOjEsImZvcmV2ZXIiOmZhbHNlfQ.qwm8ss75mMeW2fOe_vFQTmYawg_Iicynh_g-XkVFTVk"},
+          "Https" : "dune.apps.dreamfactory.com"
         }
       }
     }
-  }]
+  }
+  ]
 }
