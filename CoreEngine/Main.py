@@ -24,6 +24,14 @@ def health_check():
 
     return jsonify(response)
 
+@app.route('/', methods=['POST', 'GET'])
+def load_balance_check():
+    response = ["status: balance checking success"]
+
+    if response is None:
+        abort(400, 'Bad Request.')
+
+    return jsonify(response)
 
 if __name__ == '__main__':
     app.run(threaded=True, port=5000)
