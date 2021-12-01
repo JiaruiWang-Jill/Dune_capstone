@@ -3,7 +3,6 @@ import os
 
 from flask import jsonify
 
-
 class Parser:
     def __init__(self, user_id):
         mpath = os.path.abspath(os.path.dirname(__file__))

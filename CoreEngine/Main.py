@@ -3,11 +3,11 @@ from flask import Flask, request, jsonify, abort
 
 app = Flask(__name__)
 
-
 @app.route('/task/<int:uuid>', methods=['POST'])
 def execute_tasks(uuid):
     task_list = request.json['TaskList']
-    response = command_line(uuid, task_list)
+    multi_thread = request.json['MultiThread']
+    response = command_line(uuid, task_list, multi_thread)
 
     if response is None:
         abort(400, 'Bad Request. Please check log for further information')

@@ -7,18 +7,15 @@
           "Operations": {
             "GET_ALL" : {
               "API_Path" : "GET /kafka/v3/clusters/lkc-6p088/topics",
-              "Request" : {},
-              "Response" : { "Data" : "..."}
+              "Request" : {}
             },
             "DELETE" : {
               "API_Path" : "DELETE /kafka/v3/clusters/lkc-6p088/topics/{topic_name}",
-              "Request" : {"Path_Param" : ["topic_name"]},
-              "Response" : { "Data" : "..."}
+              "Request" : {"Path_Param" : ["topic_name"]}
             },
             "POST" : {
               "API_Path" : "POST /kafka/v3/clusters/lkc-6p088/topics",
-              "Request" : {"Body" : {"Required" : ["topic_name"], "Optional": []}},
-              "Response" : { "Data" : "..."}
+              "Request" : {"Body" : {"Required" : ["topic_name"], "Optional": []}}
             }
           },
           "Authentication": {"Authorization" : "Basic M0RNUFY0UTRBUk5FRkxJNDpLNkdQNThNTlFPYlh5TXVQdVZ3eHN1aUdiTld4aDdGaWRuWmU0WUx3K2pvVW1xQXZXcHZkbm11K3h4TnNIdEcvCg=="},
@@ -30,23 +27,19 @@
           "Operations": { 
             "GET_ALL": { 
               "API_Path" : "GET /api/v2/jrdune/_table/test_table",
-              "Request" : {},
-              "Response" : { "Data" : "..."}
+              "Request" : {}
             },
             "GET": { 
               "API_Path" : "GET /api/v2/jrdune/_table/test_table/{id}",
-              "Request" : {"Path_Param" : ["id"]},
-              "Response" : { "Data" : "..."}
+              "Request" : {"Path_Param" : ["id"]}
             },
             "DELETE": { 
               "API_Path" : "DELETE /api/v2/jrdune/_table/test_table/{id}",
-              "Request" : {"Path_Param" : ["id"]},
-              "Response" : { "Data" : "..."}
+              "Request" : {"Path_Param" : ["id"]}
             },
             "POST": { 
               "API_Path" : "POST /api/v2/jrdune/_table/test_table",
-              "Request" : {"Body" : {"Required" : ["resource"], "Optional": []}},
-              "Response" : { "Data" : "..."}
+              "Request" : {"Body" : {"Required" : ["resource"], "Optional": []}}
             }
           },
           "Authentication": {"accept":"application/json",
