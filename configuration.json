@@ -49,7 +49,9 @@
               "Response" : { "Data" : "..."}
             }
           },
-          "Authentication": {"accpet":"application/json","X-DreamFactory-API-Key": "36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88","X-DreamFactory-Session-Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4MGMyZjNiM2I0YTZjODIwMDgwMmFmYzZmODNlNzY1MyIsImlzcyI6Imh0dHBzOi8vZHVuZS5hcHBzLmRyZWFtZmFjdG9yeS5jb20vYXBpL3YyL3N5c3RlbS9hZG1pbi9zZXNzaW9uIiwiaWF0IjoxNjM4MjQ4NzkwLCJleHAiOjE2MzgzMzUxOTAsIm5iZiI6MTYzODI0ODc5MCwianRpIjoiVHBmdEZobzBsV1FVNzFLZSIsInVzZXJfaWQiOjEsImZvcmV2ZXIiOmZhbHNlfQ.qwm8ss75mMeW2fOe_vFQTmYawg_Iicynh_g-XkVFTVk"},
+          "Authentication": {"accept":"application/json",
+            "X-DreamFactory-API-Key": "36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88",
+            "X-DreamFactory-Session-Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4MGMyZjNiM2I0YTZjODIwMDgwMmFmYzZmODNlNzY1MyIsImlzcyI6Imh0dHBzOi8vZHVuZS5hcHBzLmRyZWFtZmFjdG9yeS5jb20vYXBpL3YyL3N5c3RlbS9hZG1pbi9zZXNzaW9uIiwiaWF0IjoxNjM4MzMyOTI0LCJleHAiOjE2Mzg0MTkzMjQsIm5iZiI6MTYzODMzMjkyNCwianRpIjoiRDY0MzAyMjVFVjRNd1BFTSIsInVzZXJfaWQiOjEsImZvcmV2ZXIiOmZhbHNlfQ.c-uuW-VBMuAG497eZDNzFTCf2-dF3thOqBxguhHPOzE"},
           "Https" : "dune.apps.dreamfactory.com"
         }
       }
