@@ -1,7 +1,7 @@
 import http.client
 import json
+import CoreEngine.transform
 from CoreEngine.Parser import Parser
-
 
 def command_line(user_id, task_list):
     # Check whether user exists
@@ -15,26 +15,48 @@ def command_line(user_id, task_list):
         split_task = task.split(" ")
         operation = split_task[0]
         params = split_task[1:]
-        if not parser.check_permission(task=operation, params=params):
+        # TODO: ">" permission
+        if operation is not ">" and not parser.check_permission(task=operation, params=params):
             # this user doesn't have permission to this specific task
             print("User doesn't have permission to: " + task)
             return None
 
-    # TODO: Add cross-operation logic (ETL processing, please refer to https://github.com/MarkGaox/Dune/issues/5
-    #  for further information)
     # TODO: Add fault-tolerant logic. For example, re-execution when encountering failure.
     result = []
+    # TODO: put three lines transformation into one line?
+    tmp = None
     for task in task_list:
-        split_task = task.split(" ")
-        operation = split_task[0]
-        params = split_task[1:]
-        api_path = parser.generate_path(operation, params)
-        https = parser.get_https(operation)
-        authentication = parser.get_authentication(operation)
-        payload = parser.generate_payload(params)
-        result.append(execute_task(https, authentication, payload, api_path))
+        if task.startswith('>'):
+            split_task = task.split(" ")
+            target = split_task[1]
+            if target.endswith('.py'):
+                try:
+                    tmp = eval("CoreEngine.transform." + split_task[2])(tmp)
+                    result.append("{\"status\": \"Data Transformation Completed!\"}")
+                except:
+                    print("Data Transformation fails!")
+                    return None
+            else:
+                operation = split_task[1]
+                params = tmp
+                # TODO: duplicate code
+                api_path = parser.generate_path(operation, params)
+                https = parser.get_https(operation)
+                authentication = parser.get_authentication(operation)
+                payload = parser.generate_payload(params)
+                tmp = execute_task(https, authentication, payload, api_path)
+                result.append(tmp)
+        else:
+            split_task = task.split(" ")
+            operation = split_task[0]
+            params = split_task[1:]
+            api_path = parser.generate_path(operation, params)
+            https = parser.get_https(operation)
+            authentication = parser.get_authentication(operation)
+            payload = parser.generate_payload(params)
+            tmp = execute_task(https, authentication, payload, api_path)
+            result.append(tmp)
     return result
-
 
 def execute_task(https, authorization, payload, api_path):
     conn = http.client.HTTPSConnection(https)
