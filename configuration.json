@@ -18,7 +18,7 @@
               "Request" : {"Body" : {"Required" : ["topic_name"], "Optional": []}}
             }
           },
-          "Authentication": {"Authorization" : "Basic M0RNUFY0UTRBUk5FRkxJNDpLNkdQNThNTlFPYlh5TXVQdVZ3eHN1aUdiTld4aDdGaWRuWmU0WUx3K2pvVW1xQXZXcHZkbm11K3h4TnNIdEcvCg=="},
+          "Authentication": {"Authorization" : "Basic =="},
           "Https" : "pkc-lzvrd.us-west4.gcp.confluent.cloud:443"
         }
       },  
@@ -43,8 +43,8 @@
             }
           },
           "Authentication": {"accept":"application/json",
-            "X-DreamFactory-API-Key": "36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88",
-            "X-DreamFactory-Session-Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4MGMyZjNiM2I0YTZjODIwMDgwMmFmYzZmODNlNzY1MyIsImlzcyI6Imh0dHBzOi8vZHVuZS5hcHBzLmRyZWFtZmFjdG9yeS5jb20vYXBpL3YyL3N5c3RlbS9hZG1pbi9zZXNzaW9uIiwiaWF0IjoxNjM4MzMyOTI0LCJleHAiOjE2Mzg0MTkzMjQsIm5iZiI6MTYzODMzMjkyNCwianRpIjoiRDY0MzAyMjVFVjRNd1BFTSIsInVzZXJfaWQiOjEsImZvcmV2ZXIiOmZhbHNlfQ.c-uuW-VBMuAG497eZDNzFTCf2-dF3thOqBxguhHPOzE"},
+            "X-DreamFactory-API-Key": "36fda24fe5588",
+            "X-DreamFactory-Session-Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..c-uuW-VBMuAG497eZDNzFTCf2-dF3thOqBxguhHPOzE"},
           "Https" : "dune.apps.dreamfactory.com"
         }
       }
