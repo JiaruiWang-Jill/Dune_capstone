@@ -85,6 +85,8 @@ curl --location --request POST 'https://dune-app-ucla.herokuapp.com/task/1' \
         "Product:kafka:topic:Operations:GET_ALL",
         "Product:kafka:topic:Operations:DELETE topic_name:t1",
         "Product:kafka:topic:Operations:GET_ALL"
-    ]
+    ],
+    "MultiThread" : false
+}
 }'
 ```
