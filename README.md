@@ -12,7 +12,8 @@ Recommended Tools: Postman
 To start with, please set up your python environment. In this project, we will use virtual environment.
 ```commandline
 python -m venv venv/
-source venv/bin/activate
+source venv/bin/activate (macOs)
+.\venv\Scripts\activate (windows)
 pip install -r requirements.txt
 ```
 Above commands will help you to install required packages. Since we are using Heroku as our deployment platform,

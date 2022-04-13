@@ -1,4 +1,4 @@
-from CoreEngine.EventBus import command_line
+from EventBus import command_line
 from flask import Flask, request, jsonify, abort
 
 app = Flask(__name__)

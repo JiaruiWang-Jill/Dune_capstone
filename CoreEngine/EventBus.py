@@ -1,8 +1,8 @@
 import http.client
 import json
 import threading
-import CoreEngine.transform
-from CoreEngine.Parser import Parser
+import transform
+from Parser import Parser
 
 def command_line(user_id, task_list, multi_thread):
     # Check whether user exists
