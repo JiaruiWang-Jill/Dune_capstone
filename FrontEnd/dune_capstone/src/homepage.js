@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 function HomePage() {
     const [inputValue, setInput] = useState('');
+    const [fetchError, setFetchError] = useState('');
     let navigate = useNavigate(); 
     function handleSubmit() {
         const requestOptions = {
@@ -10,12 +11,22 @@ function HomePage() {
             body: inputValue
         };
         fetch('http://127.0.0.1:5000/task/1', requestOptions)
-            .then(response => response.json())
-            .then(data =>{
+            .then(response => 
+              {
+              if (!response.ok) { 
+                setFetchError("Error, status code is "+response.status);
+                throw new Error("Error, status code is "+response.status)
+              }
+
+              return response.json() 
+            }
+            ).then(data =>{ 
                 navigate( "/resultpage", {state:{plaintext: JSON.parse(data[0])}})
               }
-              )
-             
+            ).catch(error => {
+              console.log("error", error)
+            })
+            
     }
 
     return (
@@ -26,7 +37,8 @@ function HomePage() {
         </label>
          
         <button onClick={handleSubmit} type="submit" value="Submit"> Submit </button>
- 
+        <div >{fetchError} </div>
+        
       </div>
     );
   }
