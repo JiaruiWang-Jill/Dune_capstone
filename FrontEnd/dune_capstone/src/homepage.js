@@ -17,11 +17,11 @@ function HomePage() {
                 setFetchError("Error, status code is "+response.status);
                 throw new Error("Error, status code is "+response.status)
               }
-
+              console.log("response json")
               return response.json() 
             }
             ).then(data =>{ 
-                navigate( "/resultpage", {state:{plaintext: JSON.parse(data[0])}})
+                navigate( "/resultpage", {state:{plaintext: data, tasklist: JSON.parse(inputValue).TaskList}})
               }
             ).catch(error => {
               console.log("error", error)
