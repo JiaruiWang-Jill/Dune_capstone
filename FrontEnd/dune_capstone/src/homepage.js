@@ -10,6 +10,8 @@ function HomePage() {
             headers: { 'Content-Type': 'application/json' },
             body: inputValue
         };
+        console.log("requestOptions", requestOptions)
+        console.log("input Value", inputValue)
         fetch('http://127.0.0.1:5000/task/1', requestOptions)
             .then(response => 
               {
@@ -21,7 +23,7 @@ function HomePage() {
               return response.json() 
             }
             ).then(data =>{ 
-                navigate( "/resultpage", {state:{plaintext: data, tasklist: JSON.parse(inputValue).TaskList}})
+                // navigate( "/resultpage", {state:{plaintext: data, tasklist: JSON.parse(inputValue).TaskList}})
               }
             ).catch(error => {
               console.log("error", error)

@@ -3,7 +3,6 @@ import {useLocation} from 'react-router-dom';
 
 function ResultPage(){
     const [get_allResult, setGet_AllResult] = useState([]);
-
     const location = useLocation();
     useEffect(()=>{ 
         let data_all = location.state.plaintext;
@@ -34,7 +33,7 @@ function ResultPage(){
     return (
         <div className="ResultPage">
         <label>
-            Result Page here haha
+            Result Page here
         </label>
         <ul>
             {get_allResult.map((entry) => (

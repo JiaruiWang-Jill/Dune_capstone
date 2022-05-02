@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+.left {
+    float: left;
+    width: 20%; 
+}
+
+.right {
+    float: left;
+    width: 80%;
+}

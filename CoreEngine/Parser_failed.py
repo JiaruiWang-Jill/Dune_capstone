@@ -14,8 +14,8 @@ class Parser:
     @staticmethod
     def build_params_dict(params):
         params_dict = {} 
-        for p in params:
-            print("current p is ", p) 
+        for p in params: 
+            print("p", p)
             if "resource" in p: 
                 pair0 = p.split(":")[0]
                 pair1 = p[p.index(":")+1:] 
@@ -29,9 +29,45 @@ class Parser:
                 params_dict[pair0] = pair1_list
             else:
                 pair = p.split(":")
-                print("pair is ", pair)
                 params_dict[pair[0]] = pair[1] 
         return params_dict
+    
+    # @staticmethod
+    # #TODO pass two params, how to parse
+    # def build_params_dict(params):
+    #     print("params", params)
+    #     params_dict = {} 
+        # for p in params: 
+        #     print("p is ", p)
+        #     if "resource" in p: 
+        #         pair0 = p.split(":")[0]
+        #         pair1 = p[p.index(":")+1:] 
+        #         temp_dict = {}
+        #         pair1_list = []
+        #         while '{' in pair1:
+        #             # name_value = pair1[pair1.index('{')+6 : pair1.index('}')]
+        #             # pair1 = pair1[pair1.index('}')+1:]
+        #             # temp_dict["name"] = name_value
+        #             # pair1_list.append(temp_dict) 
+        #             inserted_value = pair1[pair1.index('{')+1 : pair1.index('}')]
+        #             print("inserted value is ", inserted_value)
+        #             value_list = [x.strip() for x in inserted_value.split(',')]
+        #             print(value_list)
+        #             for value_pair in value_list:
+        #                 name = value_pair.split(':')[0]
+        #                 value = value_pair.split(':')[1]
+        #                 temp_dict[name] = value
+        #             pair1 = pair1[pair1.index('}')+1:] 
+        #             pair1_list.append(temp_dict) 
+        #             print("temp_dict", temp_dict)
+        #         print("pair1_list", pair1_list)
+        #         params_dict[pair0] = pair1_list 
+        #     else:
+        #         pair = p.split(":")
+        #         print("pair0", pair[0], "pair1", pair[1])
+        #         params_dict[pair[0]] = pair[1] 
+        # print("final ans", params_dict)
+        # return params_dict
 
     def find_user(self):
         user_list = self.configuration["User"]
@@ -87,7 +123,6 @@ class Parser:
                         print("Need valid body parameters")
                         return False
         return True
-
     def generate_path(self, task, params):
         t_list = task.split(":")
         cur = self.find_and_get_user()
@@ -105,6 +140,7 @@ class Parser:
     def generate_payload(self, params):
         # Replace the variable in Body_Param with given params
         params_dict = Parser.build_params_dict(params)
+        print("params", params)
         return params_dict
 
     def get_https(self, task):
@@ -131,9 +167,23 @@ class Parser:
 # print(x.check_permission("Product:kafka:topic:Operations:POST", []))
 # print(x.check_permission("Product:kafka:topic:Operations:DELETE", []))
 
-# print(x.generate_path("Product:kafka:topic:Operations:DELETE", ["topic_name:t1"]))
+
 # print(x.generate_payload(["topic_name:t1"]))
 # print(x.get_https("Product:kafka:topic:Operations:DELETE"))
 # print(x.get_authentication("Product:kafka:topic:Operations:DELETE"))
-p = Parser
-p.build_params_dict(['resource:[{name:jiarui2},{name:junyu2}]'])
+
+parser = Parser(1)
+task = "Product:mysql:table:Operations:POST resource:[{name:jiarui3}, {name:junyu}, {name:nazha}]"
+split_task = task.split(" ")
+operation = split_task[0]
+params = split_task[1:]
+print("operation", operation, "params", params)
+api_path = parser.generate_path(operation, params)
+https = parser.get_https(operation)
+authentication = parser.get_authentication(operation)
+payload = parser.generate_payload(params)
+# print(https)
+# print(authentication)
+print(payload)
+# print(api_path)
+# tmp = execute_task(https, authentication, payload, api_path)

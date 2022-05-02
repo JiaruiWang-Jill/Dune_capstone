@@ -10,6 +10,11 @@
               "Request" : {},
               "Response" : { "Data" : "..."}
             },
+            "GET" : {
+              "API_Path" : "GET /kafka/v3/clusters/lkc-38n2yo/topics/{topic_name}",
+              "Request" : {"Path_Param" : ["topic_name"]},
+              "Response" : { "Data" : "..."}
+            },
             "DELETE" : {
               "API_Path" : "DELETE /kafka/v3/clusters/lkc-38n2yo/topics/{topic_name}",
               "Request" : {"Path_Param" : ["topic_name"]},
@@ -29,26 +34,28 @@
         "table": {   
           "Operations": { 
             "GET_ALL": { 
-              "API_Path" : "GET /api/v2/jrdune/_table/test_table",
+              "API_Path" : "GET /api/v2/dune_capstone2/_table/test_table",
               "Request" : {}
             },
             "GET": { 
-              "API_Path" : "GET /api/v2/jrdune/_table/test_table/{id}",
+              "API_Path" : "GET /api/v2/dune_capstone2/_table/test_table/{id}",
               "Request" : {"Path_Param" : ["id"]}
             },
             "DELETE": { 
-              "API_Path" : "DELETE /api/v2/jrdune/_table/test_table/{id}",
+              "API_Path" : "DELETE /api/v2/dune_capstone2/_table/test_table/{id}",
               "Request" : {"Path_Param" : ["id"]}
             },
             "POST": { 
-              "API_Path" : "POST /api/v2/jrdune/_table/test_table",
+              "API_Path" : "POST /api/v2/dune_capstone2/_table/test_table",
               "Request" : {"Body" : {"Required" : ["resource"], "Optional": []}}
             }
           },
           "Authentication": {"accept":"application/json",
-            "X-DreamFactory-API-Key": "36fda24fe5588",
-            "X-DreamFactory-Session-Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..c-uuW-VBMuAG497eZDNzFTCf2-dF3thOqBxguhHPOzE"},
-          "Https" : "dune.apps.dreamfactory.com"
+            "X-DreamFactory-API-Key": "36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88",
+            "X-DreamFactory-Session-Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NThkYjhiZTViNGUwNmI3ZWRmY2JhZjU0YmVjMGQzNSIsImlzcyI6Imh0dHBzOi8vZHVuZWNhcHN0b25lLmFwcHMuZHJlYW1mYWN0b3J5LmNvbS9hcGkvdjIvc3lzdGVtL2FkbWluL3Nlc3Npb24iLCJpYXQiOjE2NTE1MDIyMjYsImV4cCI6MTY1MTU4ODYyNiwibmJmIjoxNjUxNTAyMjI2LCJqdGkiOiJxVkc4NjNVTzZBV2NGUHJ6IiwidXNlcl9pZCI6MSwiZm9yZXZlciI6ZmFsc2V9.2xMa2-L-JJ7WRQZM5owOIA9igf1JWFTwcZZeUP3mOR0"
+            },
+          "Https" : "dunecapstone.apps.dreamfactory.com"
+          
         }
       }
     }
