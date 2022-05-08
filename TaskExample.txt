@@ -9,3 +9,8 @@
 "TaskList" : ["Product:kafka:topic:Operations:GET_ALL"],
 "MultiThread" : false
 }
+
+{
+"TaskList" : ["Product:mysql:table:Operations:GET_ALL"],
+"MultiThread" : false
+}
