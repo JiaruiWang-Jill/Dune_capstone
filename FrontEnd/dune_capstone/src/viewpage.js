@@ -19,7 +19,7 @@ function ViewPage(){
             headers: { 'Content-Type': 'application/json' },
             body: '{"TaskList" : ["Product:mysql:table:Operations:GET_ALL"], "MultiThread" : false}'
         };
-        fetch('http://127.0.0.1:5000/task/1', requestMysqlOptions)
+        fetch('https://dune-app-ucla.herokuapp.com/task/1', requestMysqlOptions)
             .then(response => 
             {
               return response.json() 
@@ -39,7 +39,7 @@ function ViewPage(){
             headers: { 'Content-Type': 'application/json' },
             body: '{"TaskList" : ["Product:kafka:topic:Operations:GET_ALL"], "MultiThread" : false}'
         };
-        fetch('http://127.0.0.1:5000/task/1', requestKafkaOptions)
+        fetch('https://dune-app-ucla.herokuapp.com/task/1', requestKafkaOptions)
             .then(response => 
             {
                 return response.json() 
@@ -69,7 +69,7 @@ function ViewPage(){
             headers: { 'Content-Type': 'application/json' },
             body: requestInput
         }; 
-        fetch('http://127.0.0.1:5000/task/1', requestOptions)
+        fetch('https://dune-app-ucla.herokuapp.com/task/1', requestOptions)
         .then(response => 
         {   
             if (!response.ok) { 

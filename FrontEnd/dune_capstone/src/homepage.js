@@ -12,7 +12,7 @@ function HomePage() {
         };
         console.log("requestOptions", requestOptions)
         console.log("input Value", inputValue)
-        fetch('http://127.0.0.1:5000/task/1', requestOptions)
+        fetch('https://dune-app-ucla.herokuapp.com/task/1', requestOptions)
             .then(response => 
               {
               if (!response.ok) { 
