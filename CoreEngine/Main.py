@@ -1,4 +1,4 @@
-from EventBus import command_line
+from CoreEngine.EventBus import command_line
 from flask import Flask, request, jsonify, abort
 from flask_cors import CORS
 app = Flask(__name__)
