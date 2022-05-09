@@ -69,7 +69,7 @@ function ViewPage(){
             headers: { 'Content-Type': 'application/json' },
             body: requestInput
         }; 
-        fetch('https://dune-app-ucla.herokuapp.com/task/1', requestOptions)
+        fetch('http://127.0.0.1:5000/task/1', requestOptions)
         .then(response => 
         {   
             if (!response.ok) { 

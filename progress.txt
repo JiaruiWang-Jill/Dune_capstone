@@ -1,0 +1,118 @@
+4.13
+创建confluent 新的账号。
+遇到了create topic, authorization failed的问题
+解决方法：创建好新的帐号之后，先create topic，再create api key 这样就可以了。顺序反过来就会出错
+debug可以用D:\UCLA\2021\lectures\214 big data sys\project\Dune\testjiarui.py 来单个测试
+
+出现报错无法将“XXX”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。是因为用了powershell
+powershell 和 command line不一样
+
+CMD is the command line for Microsoft Windows operating system
+Powershell is a task-based command-line interface, specifically designed for system admins and is based on the 
+Bash is a command-line and scripting language for most Unix/Linux-based operating systems.
+
+react 进度: https://reactjs.org/docs/create-a-new-react-app.html
+
+
+4.23 
+
+如何激活环境
+.\capstone\venv\Scripts\activate
+
+如何跑起来front end 
+cd Dune_capstone\FrontEnd\dune_capstone, 然后npm start
+
+控制内容在render的时候改变，涉及到的知识是 life cycle。 react最开始的时候用的是life cycle和class, 后来变成了state hook, 也就是use state
+https://www.w3schools.com/react/react_usestate.asp 这里讲得比较好。
+usestate 的set function只能在return <div> 这些里面call，否则会有infinite call 的出现
+useeffect 是在dependency 变化的时候改变的 
+
+
+4.26
+如何让<div> 在if else情况下显示不同的东西
+
+ETL 其实是把一个table name, post 到Kafka的一个topic name上面去。
+
+4.30
+ETL不可以。
+1.理解逻辑，学习python是怎么发curl 的，然后看代码哪里有问题。    params_dict[pair[0]] = pair[1]
+IndexError: list index out of range。晚上再学
+
+2.先把viewpage 的 get_all 画出来， 三个button搞好， post和delete可以运作。 就是我定义里面的POST DELETE  
+。
+
+
+5.1
+true false value显示不出来，{true.toString()}. 把它放在外面就不可以，因为只有括号里面是动态的，括号外面是静态的
+
+
+5.7
+from import的问题，我本来改成了from EventBus import command_line，python main.py就可以正常运行。
+但是heroku local就不能正常运行，他会说找不到，非要变成from CoreEngine.EventBus import 才可以正常运行。
+
+解决方法：https://stackoverflow.com/questions/41412917/getting-error-importerror-no-module-named-on-heroku-but-not-locally
+让python3的PYTHONPATH是CoreEngine在的地方就可以了
+
+jr@jr-linux:~/capstone/Dune_capstone$ export PYTHONPATH=$PYTHONPATH:$(pwd)
+jr@jr-linux:~/capstone/Dune_capstone$ echo $PYTHONPATH
+:/home/jr/capstone/Dune_capstone
+
+然后再运行python3 main.py就对了
+
+然后设置了PYTHONPATH之后，etl也对了..... 辣鸡
+export PYTHONPATH=$PYTHONPATH:/home/jr/capstone/Dune_capstone
+history|grep PYTHONPATH
+ 696  export PYTHONPATH=$PYTHONPATH:$(pwd)
+  697  echo $PYTHONPATH
+
+
+5.8
+heroku deploy参考tutorial https://devcenter.heroku.com/articles/git
+因为要用到gnicorn, 所以我们用Ubuntu，而不用windows
+
+就在folder里面 heroku heroku git:remote -a dune-app-ucla, 然后git push origin main完了
+
+
+git pull 会出现^x 这种，我也不知道怎么操作，那就用 git pull rebase 哈哈哈哈哈 超级好用
+
+
+web server 和 database server 不一样。
+比如我这个例子里面, database server 是用heroku搭建起来的
+https://www.tl80.cn/article/11992
+
+
+ubuntu没有办法安装16+ node 和npm 用sudo apt get
+所以用nvm来安装 https://www.itcoder.tech/posts/how-to-install-node-js-on-ubuntu-20.04/
+
+然后删除node_modules和package.json, 用npm install
+
+
+安装heroku
+ sudo curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+
+其实5.8做的主要事情是，1. 把project 在ubuntu上配置起来，解决了 import path的问题，npm 和 heroku 跑起来, 搞明白了 git push heruko main 就可以deploy到后端去。
+2. 研究了一下web server 和 databse server, 其实在这个project 里面，rest api 的提供者， 比如dreamfactory 和 confluent是database server， 称之为databse云服务器。
+heroku是web server。 react + flask + heroku是整个app的pipeline。 react是前端，flask是后端
+
+所以react 前端是可以也用heroku的server的。
+1. 把react里面node run build, 然后把build folder 粘贴复制过去。
+2. 然后利用heroku的url, https://dune-app-ucla.herokuapp.com/ 重定向到build folder里面。
+
+@app.route('/resultpage')
+@app.route('/viewpage')
+@app.route('/', methods=['POST', 'GET'])
+def load_balance_check(): 
+    return render_template("index.html")
+
+
+
+
+为什么需要 heroku local 或者 python main的时候，需要port number， 比如像这样：http://127.0.0.1:5000/task/1。 
+但是deploy到heroku之后，就不需要port number： https://dune-app-ucla.herokuapp.com/task/1
+
+这是因为，没有写port number的时候 默认是80端口。我deploy到heroku之后，是heroku的server，我自己local的时候，是自己的电脑当一个server。
+https://blog.csdn.net/Sharp_UP/article/details/72772473?spm=1001.2101.3001.6650.4&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-72772473-blog-17653115.pc_relevant_paycolumn_v3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-72772473-blog-17653115.pc_relevant_paycolumn_v3&utm_relevant_index=8
+80端口是default 用来http的。用5000是为了防止80这个端口被占用，但好像其实也没有被占用
+常见端口还有各种各样的风险总结：https://rdc.hundsun.com/portal/article/933.html
+
+
