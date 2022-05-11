@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import './homepage.css';
+
 function HomePage() {
     const [inputValue, setInput] = useState('');
     const [fetchError, setFetchError] = useState('');
@@ -32,15 +34,28 @@ function HomePage() {
     }
 
     return (
-      <div className="HomePage">
-        <label>
-            Command Line:
-            <input value={inputValue} onInput={e => setInput(e.target.value)} type="text" name="task_json" />
-        </label>
-         
-        <button onClick={handleSubmit} type="submit" value="Submit"> Submit </button>
-        <div >{fetchError} </div>
-        
+      <div >
+        <div className='content'>
+          <div className='label'> Command Line:</div>
+          <br>
+          </br>
+          <textarea className='input' value={inputValue} onInput={e => setInput(e.target.value)} type="text" name="task_json" />
+          <br>
+          </br>
+          <button className='button' onClick={handleSubmit} type="submit" value="Submit"> Submit </button>
+          <br>
+          </br>
+          <div >{fetchError} </div>
+          
+          <div className='hint'>
+          Sample  task: 
+              {'\u007B'}
+              "TaskList" : ["Product:kafka:topic:Operations:GET_ALL",
+              "Product:kafka:topic:Operations:POST topic_name:t1", "Product:kafka:topic:Operations:GET_ALL"],
+              "MultiThread" : false
+              {'\u007d'}
+          </div>
+        </div>
       </div>
     );
   }

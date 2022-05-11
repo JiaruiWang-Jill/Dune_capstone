@@ -1,0 +1,58 @@
+.right{
+    float: right;
+    width: 80%;
+  }
+.sidebar{ 
+    position: fixed;
+    width: 20%;
+    height: 100vh;
+    font-size: 0.65em;
+  } 
+
+.nav {
+    position: fixed;
+    text-align: right;
+    float:left;
+    height: 100vh;
+    font-weight: bold;
+    background-color: purple;
+    color: white;
+    border-radius:0px 40px 40px 0px;
+}
+
+.nav ul{
+    padding-top: 40%;
+    list-style-type: none;
+}
+
+.nav ul li a{
+    position: relative;
+    margin: 3.2em 0; 
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 5em;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.4em;
+    display: block; 
+}
+
+.nav ul li {
+    position: relative;
+    margin: 3.2em 0; 
+}
+
+.nav ul li a:hover {
+    color: rgba(0,0,0,0.8);
+}
+
+.active {
+    color: black;
+    background-color: white;
+    border-radius: 40px 0px 0px 40px;
+}
+
+.inactive {
+    color: rgba(255,255,255,0.8); 
+}

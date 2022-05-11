@@ -5,3 +5,8 @@ body {
   font-family: Arial;
   text-align: center;
 }
+
+
+.sidebar {
+  background-color: green;
+}

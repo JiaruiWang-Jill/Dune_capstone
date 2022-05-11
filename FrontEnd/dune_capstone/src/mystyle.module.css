@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
+
+
 .button { 
   cursor: pointer;
   height: 100%;
@@ -12,6 +14,11 @@
   margin-left: 50px;
   color: #1B96FE;
   border: none;
+}
+
+.right{
+  float: right;
+  width: 80%;
 }
 
 .input {

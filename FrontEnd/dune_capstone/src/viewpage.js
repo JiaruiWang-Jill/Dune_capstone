@@ -1,18 +1,26 @@
 import { useEffect, useState } from 'react';
 import {useLocation} from 'react-router-dom';
-import styles from './mystyle.module.css';
-import commonStyles from './common.module.css';
+import styles from './mystyle.module.css'; 
 function ViewPage(){
     const [getAllMysqlResult, setGetAllMysqlResult] = useState([]);
     const [getAllKafkaResult, setGetAllKafkaResult] = useState([]);
 
     const [submitInput, setSubmitInput] = useState([]);
-    const [postResult, setPostResult] = useState([]);
-    const [deleteResult, setDeleteResult] = useState([]);
+    const [postResultMysql, setPostResultMysql] = useState([]);
+    const [deleteResultMysql, setDeleteResultMysql] = useState([]);
+    const [etlResultMysql, setEtlResultMysql] = useState([]);
     
-    const [postError, setPostError] = useState('');
-    const [deleteError, setDeleteError] = useState('');
+    const [postErrorMysql, setPostErrorMysql] = useState('');
+    const [deleteErrorMysql, setDeleteErrorMysql] = useState('');
+    const [etlErrorMysql, setEtlErrorMysql] = useState([]);
 
+    const [postResultKafka, setPostResultKafka] = useState([]);
+    const [deleteResultKafka, setDeleteResultKafka] = useState([]);
+    const [etlResultKafka, setEtlResultKafka] = useState([]);
+    
+    const [postErrorKafka, setPostErrorKafka] = useState('');
+    const [deleteErrorKafka, setDeleteErrorKafka] = useState('');
+    const [etlErrorKafka, setEtlErrorKafka] = useState([]);   
     useEffect(()=>{ 
         const requestMysqlOptions = {
             method: 'POST',
@@ -50,16 +58,20 @@ function ViewPage(){
                 }
             ).catch(error => {
                 console.log("error", error)
-            })
-        },[postResult, deleteResult]);
+            }) 
+        },[postResultMysql, deleteResultMysql,postResultKafka, deleteResultKafka, etlResultMysql]);
 
 
     
 
     function handleSubmit(requestType, tableName){
-        let requestInput = ""
+        let requestInput = "" 
         if(tableName == "mysql"){
-            requestInput = '{"TaskList":["Product:mysql:table:Operations:'+requestType+' '+submitInput +'"], "MultiThread": false}'
+            if (requestType == "ETL"){
+                requestInput = '{"TaskList":["Product:mysql:table:Operations:GET '+submitInput +' > tranform.py load_mysql_data_into_kafka > Product:kafka:topic:Operations:POST *"], "MultiThread": false}'
+            }else{
+                requestInput = '{"TaskList":["Product:mysql:table:Operations:'+requestType+' '+submitInput +'"], "MultiThread": false}'
+            } 
         }else if(tableName == "kafka"){
             requestInput = '{"TaskList":["Product:kafka:topic:Operations:'+requestType+' '+submitInput +'"], "MultiThread": false}'
         }
@@ -69,48 +81,83 @@ function ViewPage(){
             headers: { 'Content-Type': 'application/json' },
             body: requestInput
         }; 
-        fetch('http://127.0.0.1:5000/task/1', requestOptions)
+        fetch('https://dune-app-ucla.herokuapp.com/task/1', requestOptions)
         .then(response => 
         {   
-            if (!response.ok) { 
-                if (requestType == "POST"){
-                    setPostError("Error, status code is "+response.status);
-                    setPostResult([])
-                }else if(requestType == "DELETE"){
-                    setDeleteError("Error, status code is "+response.status);
-                    setDeleteResult([])
-                } 
+            if (!response.ok) {  
+                if (requestType == "POST" && tableName == "mysql"){
+                    setPostErrorMysql("Error, status code is "+response.status);
+                    setPostResultMysql([])
+                } else if (requestType == "POST" && tableName == "kafka"){
+                    setPostErrorKafka("Error, status code is "+response.status);
+                    setPostResultKafka([])
+                } else if(requestType == "DELETE"&& tableName == "mysql"){
+                    setDeleteErrorMysql("Error, status code is "+response.status);
+                    setDeleteResultMysql([])
+                } else if(requestType == "DELETE"&& tableName == "kafka"){
+                    setDeleteErrorKafka("Error, status code is "+response.status);
+                    setDeleteResultKafka([])
+                } else if(requestType == "ETL"&& tableName == "mysql") {
+                    setEtlErrorMysql("Error, status code is "+response.status);
+                    setEtlResultKafka([])                   
+                }
                 throw new Error("Error, status code is "+response.status)
               } 
               return response.json()  
         }
         ).then(data =>{ 
-            if (requestType == "POST"){ 
-                setPostError("")
-                setPostResult(data)  
-            } else if (requestType == "DELETE"){
-                if (data[0].search("error") > 0){
-                    setDeleteError(data[0]);
-                    setDeleteResult([])
-                }else{
-                    setDeleteError("")
-                    setDeleteResult(data) 
+            if(tableName == "mysql"){
+                if (requestType == "POST"){ 
+                    setPostErrorMysql("")
+                    setPostResultMysql(data)  
+                } else if (requestType == "DELETE"){
+                    if (data[0].search("error") > 0){
+                        setDeleteErrorMysql(data[0]);
+                        setDeleteResultMysql([])
+                    }else{
+                        setDeleteErrorMysql("")
+                        setDeleteResultMysql(data) 
+                    } 
+                } else if(requestType == "ETL"){ 
+                    let isError = false 
+                    for (let i = 0; i < data.length; i++){
+                        let eachdata = data[i] 
+                        if (eachdata.search("error") > 0){
+                            setEtlErrorMysql(eachdata);
+                            setEtlResultMysql([])
+                            isError = true
+                        }
+                    } 
+                    if(!isError){
+                        setEtlErrorMysql("")
+                        setEtlResultMysql(data) 
+                    }
+
                 }
-                
-            }
+            }else if (tableName == "kafka"){ 
+                if (requestType == "POST"){ 
+                    setPostErrorKafka("")
+                    setPostResultKafka(data)  
+                } else if (requestType == "DELETE"){ 
+                    if (data[0].search("error") > 0){
+                        setDeleteErrorKafka(data[0]);
+                        setDeleteResultKafka([])
+                    }else{
+                        setDeleteErrorKafka("")
+                        setDeleteResultKafka(data) 
+                    } 
+                } 
+            } 
           }
         ).catch(error => {
           console.log("error", error)
         })
-    }
+    } 
 
-    //css
-    //之后的任务是，把ETL修好
+
     return (
         <div>
-        <div className={commonStyles.left}>left side setting</div>
-
-        <div className={commonStyles.right}> 
+        <div className={styles.right}> 
             <div className={styles.tableBlock}>  
                 <p> MySQL Table</p>
                 <table className={styles.table}>
@@ -129,26 +176,25 @@ function ViewPage(){
                     ))}
                 </table>  
             </div>
-
-            {/* 把table 和 左边的三个导引栏做好 */}
-            {/* 休息一下 学os 或者 269 presentation */}
-            
+      
             <div className={styles.inputBlock}>
                 <p> Modify MySQL</p>
                 <div>
-                    <input className = {styles.input} placeholder='resource:[{name:test}, {name:test2}]' onInput={e => setSubmitInput(e.target.value)} type="text" name="task_json" /> 
+                    <input className = {styles.input} placeholder='resource:[{name:test}, {name:test2}]' onInput={e => setSubmitInput(e.target.value.replace(/\s/g, ''))} type="text" name="task_json" /> 
                     <button className = {styles.button} onClick={() =>handleSubmit("POST", "mysql")} type="submit" value="postSubmit">POST </button>
-                    <p>{postError ? postError : ""}</p> <p>{postResult.length > 0? "Success":""}</p>
+                    <p>{postErrorMysql ? postErrorMysql : ""}</p> <p>{postResultMysql.length > 0? "Success":""}</p>
                             
                     <br></br>
-                    <input className = {styles.input}  placeholder='id:6' onInput={e => setSubmitInput(e.target.value)} type="text" name="task_json" /> 
+                    <input className = {styles.input}  placeholder='id:6' onInput={e => setSubmitInput(e.target.value.replace(/\s/g, ''))} type="text" name="task_json" /> 
                     <button className = {styles.button} onClick={() =>handleSubmit("DELETE", "mysql")} >DELETE </button>
-                    <p>{deleteError ? deleteError : ""}</p> <p>{deleteResult.length > 0? "Success":""}</p>
+                    <p>{deleteErrorMysql ? deleteErrorMysql : ""}</p> <p>{deleteResultMysql.length > 0? "Success":""}</p>
                     
                     <br></br>
-                    <input className = {styles.input} onInput={e => setSubmitInput(e.target.value)} type="text" name="task_json" /> 
-                    <button className = {styles.button}>ETL </button>
+                    <input className = {styles.input} placeholder='id:6' onInput={e => setSubmitInput(e.target.value.replace(/\s/g, ''))} type="text" name="task_json" /> 
+                    <button className = {styles.button} onClick={() =>handleSubmit("ETL", "mysql")}>ETL </button>
+                    <p>{etlErrorMysql ? etlErrorMysql : ""}</p> <p>{etlResultMysql.length > 0? "Success":""}</p>
                 </div>
+
 
             </div>
             
@@ -172,18 +218,18 @@ function ViewPage(){
             <div className={styles.inputBlock}>
                 <p > Modify Kafka</p>
                 <div>
-                    <input className = {styles.input} placeholder='topic_name:t1' onInput={e => setSubmitInput(e.target.value)} type="text" name="task_json" /> 
+                    <input className = {styles.input} placeholder='topic_name:t1' onInput={e => setSubmitInput(e.target.value.replace(/\s/g, ''))} type="text" name="task_json" /> 
                     <button className = {styles.button} onClick={() =>handleSubmit("POST", "kafka")} type="submit" value="postSubmit">POST </button>
-                    <p>{postError ? postError : ""}</p> <p>{postResult.length > 0? "Success":""}</p>
+                    <p>{postErrorKafka ? postErrorKafka : ""}</p> <p>{postResultKafka.length > 0? "Success":""}</p>
                             
                     <br></br>
-                    <input className = {styles.input} placeholder='topic_name:t1' onInput={e => setSubmitInput(e.target.value)} type="text" name="task_json" /> 
+                    <input className = {styles.input} placeholder='topic_name:t1' onInput={e => setSubmitInput(e.target.value.replace(/\s/g, ''))} type="text" name="task_json" /> 
                     <button className = {styles.button} onClick={() =>handleSubmit("DELETE", "kafka")} >DELETE </button>
-                    <p>{deleteError ? deleteError : ""}</p> <p>{deleteResult.length > 0? "Success":""}</p>
+                    <p>{deleteErrorKafka ? deleteErrorKafka : ""}</p> <p>{deleteResultKafka.length > 0? "Success":""}</p>
                     
-                    <br></br>
+                    {/* <br></br>
                     <input className = {styles.input}  onInput={e => setSubmitInput(e.target.value)} type="text" name="task_json" /> 
-                    <button className = {styles.button} >ETL </button>
+                    <button className = {styles.button} >ETL </button> */}
                 </div>
 
             </div>
