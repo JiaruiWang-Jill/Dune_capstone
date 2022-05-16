@@ -8,9 +8,7 @@ function ResultPage(){
     useEffect(()=>{ 
         let data_all = location.state.plaintext;
         let task_all = location.state.tasklist;
-        const data_arr = [];
-        console.log(task_all)
-        console.log(data_all)
+        const data_arr = []; 
         for (var i = 0; i<data_all.length; i++){
             let tmp = JSON.parse(data_all[i]);
                 if (task_all[i].includes("kafka")){
@@ -35,14 +33,11 @@ function ResultPage(){
 
                 }else if (task_all[i].includes("mysql")){
 
-                    if (tmp.hasOwnProperty('error')){
-                        // console.log("error tmp", tmp)
+                    if (tmp.hasOwnProperty('error')){ 
                         data_arr.push({"id":i, "task": task_all[i], "success": false, "result":  tmp.error.message, "len":1})
                     }else{
 
-                        if(task_all[i].includes("GET_ALL")){
-                            console.log("it is get_all ", tmp, task_all[i])
-
+                        if(task_all[i].includes("GET_ALL")){ 
                             let result_list = [];
                             for(var j = 0; j<tmp.resource.length; j++){
                                 var obj = tmp.resource[j];
@@ -50,15 +45,13 @@ function ResultPage(){
                             }
                             data_arr.push({"id":i, "task": task_all[i], "success": true, "result": result_list, "len": result_list.length})
 
-                        }else if(task_all[i].includes(":GET") && ! task_all[i].includes("GET_ALL" )){
-                            console.log("it is get ", tmp, task_all[i])
+                        }else if(task_all[i].includes(":GET") && ! task_all[i].includes("GET_ALL" )){ 
                             let result_list = [];
                             result_list.push({"id":"id: "+tmp.id, "topic_name": "name: "+tmp.name});
                             data_arr.push({"id":i, "task": task_all[i], "success": true, "result": result_list, "len":2})
 
                         }
-                        else{
-                            console.log("it is post delete", tmp,  task_all[i])
+                        else{ 
                             data_arr.push({"id":i, "task": task_all[i], "success": true, "result": "Success ", "len": 1})
 
                         }
