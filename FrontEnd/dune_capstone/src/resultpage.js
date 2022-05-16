@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {useLocation} from 'react-router-dom';
-
+import styles from './mystyle.module.css';
+import './resultpage.css';  
 function ResultPage(){
     const [get_allResult, setGet_AllResult] = useState([]);
     const location = useLocation();
@@ -31,27 +32,30 @@ function ResultPage(){
         },[]);
 
     return (
-        <div className="ResultPage">
-        <label>
-            Result Page here
-        </label>
-        <ul>
+        <div className={styles.right}>
+  
+        <div>
             {get_allResult.map((entry) => (
-                <li key={entry.id}>
-                    <span> Task: {entry.task}</span>
+                <div className = "resultblock" key={entry.id}>
+                    <span className='task'> Task: {entry.task}</span>
                     <span>
                         <p>{
                             entry.len==1 ? 
                             entry.success + entry.result : 
                             entry.result.map((e)=>(
-                                <p key={e.id}> {e.topic_name} </p>
+                                <tr>
+                                    <td > {e.topic_name}</td> 
+                                    <td> {e.id}</td>
+                                </tr>
+                                
                              )
                              )
                         }</p>
+
                     </span>
-                </li>
+                </div>
             ))}
-        </ul>
+        </div>
       </div>
     );
 }

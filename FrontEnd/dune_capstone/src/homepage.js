@@ -25,7 +25,7 @@ function HomePage() {
               return response.json() 
             }
             ).then(data =>{ 
-                // navigate( "/resultpage", {state:{plaintext: data, tasklist: JSON.parse(inputValue).TaskList}})
+                navigate( "/resultpage", {state:{plaintext: data, tasklist: JSON.parse(inputValue).TaskList}})
               }
             ).catch(error => {
               console.log("error", error)

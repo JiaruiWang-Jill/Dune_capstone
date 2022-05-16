@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import {useLocation} from 'react-router-dom';
 import styles from './mystyle.module.css'; 
 function ViewPage(){
     const [getAllMysqlResult, setGetAllMysqlResult] = useState([]);
@@ -162,15 +161,15 @@ function ViewPage(){
                 <p> MySQL Table</p>
                 <table className={styles.table}>
                     <tr>
+                    <th>ID</th>
                     <th>Name</th> 
-                    <th>ID</th> 
                     <th>Complete</th> 
                     </tr>
 
                     {getAllMysqlResult.map((entry) => (
                         <tr key={entry.id}>
-                            <td> {entry.name}</td>
                             <td> {entry.id}</td>
+                            <td> {entry.name}</td>
                             <td> {entry.complete.toString()} </td>
                         </tr>
                     ))}
@@ -202,13 +201,13 @@ function ViewPage(){
                 <p> Kafka Table</p>
                 <table className={styles.table}>
                     <tr>
+                    <th>ID</th>
                     <th>Topic Name</th> 
-                    <th>ID</th> 
                     </tr>
                     {getAllKafkaResult.map((entry, index) => (
                         <tr key={index}>
-                            <td> {entry.topic_name}</td>
                             <td> {index}</td>
+                            <td> {entry.topic_name}</td>
                         </tr>
                     ))}
                 </table>  
