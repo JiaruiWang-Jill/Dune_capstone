@@ -14,22 +14,20 @@ class Parser:
     @staticmethod
     def build_params_dict(params):
         params_dict = {} 
-        for p in params:
-            print("current p is ", p) 
+        for p in params: 
             if "resource" in p: 
                 pair0 = p.split(":")[0]
                 pair1 = p[p.index(":")+1:] 
                 temp_dict = {}
-                pair1_list = []
+                pair1_list = [] 
                 while '{' in pair1:
                     name_value = pair1[pair1.index('{')+6 : pair1.index('}')]
-                    pair1 = pair1[pair1.index('}')+1:]
+                    pair1 = pair1[pair1.index('}')+1:] 
                     temp_dict["name"] = name_value
-                    pair1_list.append(temp_dict) 
+                    pair1_list.append(temp_dict.copy())  
                 params_dict[pair0] = pair1_list
             else:
                 pair = p.split(":")
-                print("pair is ", pair)
                 params_dict[pair[0]] = pair[1] 
         return params_dict
 
