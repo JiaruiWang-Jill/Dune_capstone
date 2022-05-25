@@ -52,8 +52,8 @@
           },
           "Authentication": {"accept":"application/json",
             "X-DreamFactory-API-Key": "36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88",            
-            "X-DreamFactory-Session-Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYjM4Zjk0ZmM1MmYyZjNlY2FkYTc1ZjQyMTFhMTNkOCIsImlzcyI6Imh0dHBzOi8vZHVuZWNhcHN0b25lMi5hcHBzLmRyZWFtZmFjdG9yeS5jb20vYXBpL3YyL3N5c3RlbS9hZG1pbi9zZXNzaW9uIiwiaWF0IjoxNjUzNDMxMTU2LCJleHAiOjE2NTM1MTc1NTYsIm5iZiI6MTY1MzQzMTE1NiwianRpIjoicEoxaGIzR0R6V2N6RkNmOSIsInVzZXJfaWQiOjEsImZvcmV2ZXIiOmZhbHNlfQ.S-MP1YCZ3DfOpAJ4dNnK6SZYwg5-QSW-meBSqp0KS0E"
-           },
+            "X-DreamFactory-Session-Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYjM4Zjk0ZmM1MmYyZjNlY2FkYTc1ZjQyMTFhMTNkOCIsImlzcyI6Imh0dHBzOi8vZHVuZWNhcHN0b25lMi5hcHBzLmRyZWFtZmFjdG9yeS5jb20vYXBpL3YyL3N5c3RlbS9hZG1pbi9zZXNzaW9uIiwiaWF0IjoxNjUzNTIwMTg1LCJleHAiOjE2NTM2MDY1ODUsIm5iZiI6MTY1MzUyMDE4NSwianRpIjoiNEFadWNmcTlIN05icnhqNyIsInVzZXJfaWQiOjEsImZvcmV2ZXIiOmZhbHNlfQ.qkEhQ5RT-X-tynA3MCAC5f4dsXlU0DkvpeaXQwk61Qw"
+                     },
           "Https" : "dunecapstone2.apps.dreamfactory.com"
           
         }
